@@ -15,7 +15,9 @@ const sendEmail = new SendEmail();
 mediator.on("InvoicesGenerated", async function (data: any) {
 	await sendEmail.execute(data);
 });
-const generateInvoices = new LoggerDecorator(new GenerateInvoices(contractRepository, new JsonPresenter(), mediator));
+const generateInvoices = new LoggerDecorator(
+	new GenerateInvoices(contractRepository, new JsonPresenter(), mediator
+	));
 const httpServer = new ExpressAdapter();
 new MainController(httpServer, generateInvoices);
 httpServer.listen(3000);
